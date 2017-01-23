@@ -14,6 +14,7 @@ commander
   .arguments('<first_config> <second_config>')
   .action((firstConfig, secondConfig) => {
     // passing arguments
+    print(`#red{${firstConfig}} #green{${secondConfig}}`);
   });
 
 commander

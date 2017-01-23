@@ -15,5 +15,5 @@ const result = [
 ];
 
 test('json decode test', () => {
-  // expect(func(json)).equalTo(result);
+  expect((json)).equalTo(result);
 });
