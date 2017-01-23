@@ -1,5 +1,5 @@
 run:
-	npm run babel-node -- ./src/bin/$1
+	npm run babel-node -- ./src/bin/${s}
 
 lint:
 	npm run eslint -- src __tests__
