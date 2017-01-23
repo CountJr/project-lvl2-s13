@@ -1,0 +1,7 @@
+.DS_Store
+tmp
+.vagrant
+node_modules
+dist
+.vscode
+npm-debug.log

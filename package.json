@@ -1,0 +1,71 @@
+{
+  "name": "config-compare-light",
+  "author": "countjr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CountJr/project-lvl2-s13/issues"
+  },
+  "homepage": "https://github.com/CountJr/project-lvl2-s13#readme",
+  "version": "0.1.0",
+  "description": "Config comparation and patchiong utility",
+  "main": "dist/index.js",
+  "bin": {
+    "conf-compare": "dist/bin/conf-compare.js"
+  },
+  "babel": {
+    "presets": [
+      "latest",
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ]
+  },
+  "dependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-runtime": "^6.11.6",
+    "commander": "^2.9.0",
+    "myLittleColor": "CountJr/myLittleColor"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.17.0",
+    "babel-eslint": "^7.0.0",
+    "babel-jest": "^18.0.0",
+    "babel-plugin-syntax-flow": "^6.18.0",
+    "babel-plugin-transform-flow-strip-types": "^6.21.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-env": "^1.1.4",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.16.3",
+    "codeclimate-test-reporter": "^0.4.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-flowtype": "^2.29.2",
+    "eslint-plugin-import": "^2.2.0",
+    "flow-bin": "^0.37",
+    "flow-typed": "^2.0.0",
+    "jest": "^18.1.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "babel-node": "babel-node",
+    "flow": "flow",
+    "flow-typed": "flow-typed",
+    "eslint": "eslint",
+    "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
+    "prepublish": "npm run build"
+  },
+  "repository": "git+https://github.com/CountJr/project-lvl2-s13.git",
+  "jest": {
+    "testRegex": "(/__tests__/.*|(\\.|/)(Test|spec))\\.jsx?$",
+    "testEnvironment": "node",
+    "collectCoverage": "true",
+    "coverageDirectory": "tmp",
+    "coverageReporters": [
+      "lcov"
+    ]
+  }
+}
