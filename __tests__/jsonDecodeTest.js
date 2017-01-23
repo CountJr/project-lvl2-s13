@@ -1,6 +1,6 @@
 // @flow
 
-// import {  } from 'module';
+import jsonDecode from '../src/decoders/jsonDecode';
 
 const json = '{"one": "valone", "two": "valtwo", "three": {"four": "valfour", "five": "valfive"}}';
 
@@ -15,5 +15,5 @@ const result = [
 ];
 
 test('json decode test', () => {
-  expect((json)).equalTo(result);
+  expect(jsonDecode(json)).toEqual(result);
 });
