@@ -2,6 +2,8 @@
 
 // @flow
 
+/* eslint-disable no-console */
+
 import commander from 'commander';
 import compare from '../';
 
