@@ -3,7 +3,7 @@
 // @flow
 
 import commander from 'commander';
-import print from 'mylittlecolor';
+import compare from '../';
 
 commander
   .version('0.1.0')
@@ -13,8 +13,8 @@ commander
 commander
   .arguments('<first_config> <second_config>')
   .action((firstConfig, secondConfig) => {
-    // passing arguments
-    print(`#red{${firstConfig}} #green{${secondConfig}}`);
+    const result = compare(firstConfig, secondConfig);
+    console.log(`${result}`);
   });
 
 commander

@@ -8,7 +8,7 @@
   "homepage": "https://github.com/CountJr/project-lvl2-s13#readme",
   "version": "0.1.2",
   "description": "Config comparation and patchiong utility",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
