@@ -1,22 +1,20 @@
 // @flow
 
 import YAML from 'js-yaml';
-
-const iter = obj =>
-  Object.keys(obj).reduce((acc, value) => {
-    acc.push({ key: value, value: typeof obj[value] === 'object' ? iter(obj[value]) : obj[value] });
-    return acc;
-  }, []);
+import INI from 'ini';
 
 export const json = jsFile =>
-  iter(JSON.parse(jsFile));
+  JSON.parse(jsFile);
 
 export const yaml = ymlFile =>
-  iter(YAML.load(ymlFile));
+  YAML.load(ymlFile);
 
 const yml = yaml;
 
-const decoders = { json, yml, yaml };
+export const ini = iniFile =>
+  INI.parse(iniFile);
+
+const decoders = { json, yml, yaml, ini };
 
 const decode = fileType =>
   decoders[fileType];

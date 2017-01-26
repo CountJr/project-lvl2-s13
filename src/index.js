@@ -5,7 +5,7 @@ import path from 'path';
 import decode from './decoders';
 
 const makeMap = obj =>
-  Object.values(obj).reduce((acc, value) => acc.set(value.key, value.value), new Map());
+  Object.keys(obj).reduce((acc, value) => acc.set(value, obj[value]), new Map());
 
 const compare = (data1, data2) => {
   const data1Map = makeMap(data1);
