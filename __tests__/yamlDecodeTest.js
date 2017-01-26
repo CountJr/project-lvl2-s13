@@ -2,9 +2,9 @@
 
 import fs from 'fs';
 import path from 'path';
-import { json } from '../src/decoders';
+import { yaml } from '../src/decoders';
 
-const jsonFile = fs.readFileSync(path.join(__dirname, 'fixtures', 'testFile.json'), 'utf-8');
+const jsonFile = fs.readFileSync(path.join(__dirname, 'fixtures', 'testFile.yml'), 'utf-8');
 
 const result = [
   { key: 'one', value: 'valone' },
@@ -16,6 +16,6 @@ const result = [
     ] },
 ];
 
-test('decode test | json', () => {
-  expect(json(jsonFile)).toEqual(result);
+test('decode test | yaml', () => {
+  expect(yaml(jsonFile)).toEqual(result);
 });
