@@ -15,7 +15,7 @@ commander
 commander
   .arguments('<first_config> <second_config>')
   .action((firstConfig, secondConfig) => {
-    const result = compare(firstConfig, secondConfig);
+    const result = compare(firstConfig, secondConfig, commander.format);
     console.log(`${result}`);
   });
 

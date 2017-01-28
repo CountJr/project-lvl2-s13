@@ -5,31 +5,32 @@ import compare from '../';
 
 // plain config tests
 
-// const firstFileJson = path.join(__dirname, 'fixtures', 'firstFile.json');
-// const firstFileYaml = path.join(__dirname, 'fixtures', 'firstFile.yml');
-// const firstFileIni = path.join(__dirname, 'fixtures', 'firstFile.ini');
-// const secondFile = path.join(__dirname, 'fixtures', 'secondFile.json');
+const firstFileJson = path.join(__dirname, 'fixtures', 'firstFile.json');
+const firstFileYaml = path.join(__dirname, 'fixtures', 'firstFile.yml');
+const firstFileIni = path.join(__dirname, 'fixtures', 'firstFile.ini');
+const secondFile = path.join(__dirname, 'fixtures', 'secondFile.json');
 
-// const diffJson = compare(firstFileJson, secondFile);
-// const diffYaml = compare(firstFileYaml, secondFile);
-// const diffIni = compare(firstFileIni, secondFile);
+const diffJson = compare(firstFileJson, secondFile);
+const diffYaml = compare(firstFileYaml, secondFile);
+const diffIni = compare(firstFileIni, secondFile);
 
-// const expectedResult = `{
-//     host: hexlet.io
-//   + timeout: 20
-//   - timeout: 50
-//   - proxy: 123.234.53.22
-//   + verbose: true
-// }`;
+const expectedResult = `{
+    host: hexlet.io
+  + timeout: 20
+  - timeout: 50
+  - proxy: 123.234.53.22
+  + verbose: true
+}
+`;
 
-// test('main | json compare', () =>
-//   expect(diffJson).toEqual(expectedResult));
+test('main | json compare', () =>
+  expect(diffJson).toEqual(expectedResult));
 
-// test('main | yaml compare', () =>
-//   expect(diffYaml).toEqual(expectedResult));
+test('main | yaml compare', () =>
+  expect(diffYaml).toEqual(expectedResult));
 
-// test('main | ini compare', () =>
-//   expect(diffIni).toEqual(expectedResult));
+test('main | ini compare', () =>
+  expect(diffIni).toEqual(expectedResult));
 
 // nested config tests
 
@@ -48,11 +49,11 @@ const expectedNested = `{
       - setting2: 200
         setting3: true
       - setting6: {
-            "key": "value"
+            key: value
         }
       + setting4: blah blah
       + setting5: {
-            "key5": "value5"
+            key5: value5
         }
     }
     group1: {
@@ -61,10 +62,10 @@ const expectedNested = `{
         foo: bar
     }
   - group2: {
-        "abc": "12345"
+        abc: 12345
     }
   + group3: {
-        "fee": "100500"
+        fee: 100500
     }
 }
 `;
@@ -79,4 +80,22 @@ test('nested | yml compare', () => {
 
 test('nested | ini compare', () => {
   expect(compare(firstNestedIni, secondNestedIni)).toBe(expectedNested);
+});
+
+// plain output test
+
+const expectedPlainResult = `Property 'timeout' was updated. From '50' to '20'
+Property 'proxy' was removed
+Property 'common.setting4' was removed
+Property 'common.setting5' was removed
+Property 'common.setting2' was added with value: 200
+Property 'common.setting6' was added with complex value
+Property 'group1.baz' was updated. From 'bars' to 'bas'
+Property 'group3' was removed
+Property 'verbose' was added with value: true
+Property 'group2' was added with complex value
+`;
+
+test('plain output | json compare', () => {
+  expect(compare(firstNestedJson, secondNestedJson, 'plain')).toBe(expectedPlainResult);
 });

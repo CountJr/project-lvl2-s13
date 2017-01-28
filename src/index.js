@@ -6,11 +6,11 @@ import lo from 'lodash';
 import decode from './decoders';
 
 // FIXIT: variable names
-// TODO: fix this mess of code...
+// TODO: fix this mess of code... divide output formatter
 
 const makeTab = t => ' '.repeat(4 * t);
 const parseObj = (obj, tab) => {
-  const ret = typeof obj === 'object' ? `{\n${makeTab(tab + 1)}${JSON.stringify(obj, null, '    ').replace(/[{\n|}]/g, '')}\n${makeTab(tab + 1)}}` : obj;
+  const ret = typeof obj === 'object' ? `{\n${makeTab(tab + 1)}${JSON.stringify(obj, null, '    ').replace(/[{\n|"|}]/g, '')}\n${makeTab(tab + 1)}}` : obj;
   return ret;
 };
 const ts = (r, t = 0) => {
@@ -52,7 +52,9 @@ const compare = (d1, d2) => {
   return ts(r1);
 };
 
-export default (firstFileName, secondFileName) => {
+export default (firstFileName, secondFileName, format = 'standart') => {
+  // TODO: add output formats
+  console.log(format);
   const firstFileExt = path.extname(firstFileName).replace('.', '');
   const secondFileExt = path.extname(secondFileName).replace('.', '');
 
