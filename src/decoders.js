@@ -1,18 +1,18 @@
 // @flow
 
-import YAML from 'js-yaml';
-import INI from 'ini';
+import yamlP from 'js-yaml';
+import iniP from 'ini';
 
 export const json = jsFile =>
   JSON.parse(jsFile);
 
 export const yaml = ymlFile =>
-  YAML.load(ymlFile);
+  yamlP.load(ymlFile);
 
 const yml = yaml;
 
 export const ini = iniFile =>
-  INI.parse(iniFile);
+  iniP.parse(iniFile);
 
 const decoders = { json, yml, yaml, ini };
 

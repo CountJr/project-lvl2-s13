@@ -27,6 +27,7 @@
     "commander": "^2.9.0",
     "ini": "^1.3.4",
     "js-yaml": "^3.7.0",
+    "lodash": "^4.17.4",
     "mylittlecolor": "*"
   },
   "devDependencies": {
@@ -70,6 +71,8 @@
     ],
     "collectCoverage": "true",
     "coverageDirectory": "tmp",
-    "coverageReporters": ["lcov"]
+    "coverageReporters": [
+      "lcov"
+    ]
   }
 }
