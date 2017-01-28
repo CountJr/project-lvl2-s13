@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import lo from 'lodash';
 import decode from './decoders';
-import report from './reporters/report';
+import report from './reporters';
 
 // TODO: fix this mess of code... fix variable names. and i don't like that pyramid of ifs.
 
