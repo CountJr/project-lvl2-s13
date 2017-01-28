@@ -10,9 +10,9 @@ import report from './reporters';
 // TODO: make errors catching.
 
 const parseData = (data1, data2) => {
-  const keys = lo.uniq([...Object.keys(data1), ...Object.keys(data2)]);
+  const keys = new Set([...Object.keys(data1), ...Object.keys(data2)]);
 
-  const result = keys.map((key) => {
+  const result = [...keys.values()].map((key) => {
     if (!lo.has(data1, key)) {
       return { name: key, type: 'added', val: lo.get(data2, key) };
     } else if (!lo.has(data2, key)) {
@@ -30,6 +30,8 @@ const parseData = (data1, data2) => {
 
 const getExtention = fileName =>
   path.extname(fileName).replace('.', '');
+
+// TODO: diffFromFiles + diffFromStrings
 
 export default (firstFileName, secondFileName, format = 'standart') => {
   const firstFileExt = getExtention(firstFileName);
