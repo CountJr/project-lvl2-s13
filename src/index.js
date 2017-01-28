@@ -7,9 +7,10 @@ import decode from './decoders';
 import report from './reporters';
 
 // TODO: fix this mess of code... fix variable names. and i don't like that pyramid of ifs.
+// TODO: make errors catching.
 
 const parseData = (data1, data2) => {
-  const keys = lo.uniq([...lo.keys(data1), ...lo.keys(data2)]);
+  const keys = lo.uniq([...Object.keys(data1), ...Object.keys(data2)]);
 
   const result = keys.map((key) => {
     if (!lo.has(data1, key)) {
@@ -27,9 +28,12 @@ const parseData = (data1, data2) => {
   return result;
 };
 
+const getExtention = fileName =>
+  path.extname(fileName).replace('.', '');
+
 export default (firstFileName, secondFileName, format = 'standart') => {
-  const firstFileExt = path.extname(firstFileName).replace('.', '');
-  const secondFileExt = path.extname(secondFileName).replace('.', '');
+  const firstFileExt = getExtention(firstFileName);
+  const secondFileExt = getExtention(secondFileName);
 
   const firstFileContents = fs.readFileSync(firstFileName, 'utf-8');
   const secondFileContents = fs.readFileSync(secondFileName, 'utf-8');
