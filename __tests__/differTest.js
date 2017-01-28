@@ -84,16 +84,13 @@ test('nested | ini compare', () => {
 
 // plain output test
 
-const expectedPlainResult = `Property 'timeout' was updated. From '50' to '20'
-Property 'proxy' was removed
-Property 'common.setting4' was removed
-Property 'common.setting5' was removed
-Property 'common.setting2' was added with value: 200
-Property 'common.setting6' was added with complex value
-Property 'group1.baz' was updated. From 'bars' to 'bas'
-Property 'group3' was removed
-Property 'verbose' was added with value: true
-Property 'group2' was added with complex value
+const expectedPlainResult = `Property 'common.setting2' was removed
+Property 'common.setting6' was removed
+Property 'common.setting4' was added with value 'blah blah'
+Property 'common.setting5' was added with complex value
+Property 'group1.baz' was was updated. From 'bas' to 'bars'
+Property 'group2' was removed
+Property 'group3' was added with complex value
 `;
 
 test('plain output | json compare', () => {

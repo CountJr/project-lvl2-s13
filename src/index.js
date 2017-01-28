@@ -4,29 +4,10 @@ import fs from 'fs';
 import path from 'path';
 import lo from 'lodash';
 import decode from './decoders';
+import report from './reporters';
 
 // FIXIT: variable names
 // TODO: fix this mess of code... divide output formatter
-
-const makeTab = t => ' '.repeat(4 * t);
-const parseObj = (obj, tab) => {
-  const ret = typeof obj === 'object' ? `{\n${makeTab(tab + 1)}${JSON.stringify(obj, null, '    ').replace(/[{\n|"|}]/g, '')}\n${makeTab(tab + 1)}}` : obj;
-  return ret;
-};
-const ts = (r, t = 0) => {
-  const tsMap = {
-    object: (name, val, tab) => `${makeTab(tab)}    ${name}: ${ts(val, tab + 1)}`,
-    unchanged: (name, val, tab) => `${makeTab(tab)}    ${name}: ${parseObj(val, tab)}\n`,
-    added: (name, val, tab) => `${makeTab(tab)}  + ${name}: ${parseObj(val, tab)}\n`,
-    removed: (name, val, tab) => `${makeTab(tab)}  - ${name}: ${parseObj(val, tab)}\n`,
-    changed: (name, val, tab) => `${makeTab(tab)}  + ${name}: ${val[1]}\n` +
-                                `${makeTab(tab)}  - ${name}: ${val[0]}\n`,
-  };
-  const res = r.map(row =>
-    tsMap[row.type](row.name, row.val, t),
-  );
-  return `{\n${res.join('')}${makeTab(t)}}\n`;
-};
 
 const parseData = (data1, data2) => {
   const keys = lo.uniq([...lo.keys(data1), ...lo.keys(data2)]);
@@ -47,14 +28,7 @@ const parseData = (data1, data2) => {
   return result;
 };
 
-const compare = (d1, d2) => {
-  const r1 = parseData(d1, d2);
-  return ts(r1);
-};
-
 export default (firstFileName, secondFileName, format = 'standart') => {
-  // TODO: add output formats
-  console.log(format);
   const firstFileExt = path.extname(firstFileName).replace('.', '');
   const secondFileExt = path.extname(secondFileName).replace('.', '');
 
@@ -64,5 +38,7 @@ export default (firstFileName, secondFileName, format = 'standart') => {
   const firstFileData = decode(firstFileExt)(firstFileContents);
   const secondFileData = decode(secondFileExt)(secondFileContents);
 
-  return compare(firstFileData, secondFileData);
+  const parsedData = parseData(firstFileData, secondFileData);
+
+  return report(format)(parsedData);
 };

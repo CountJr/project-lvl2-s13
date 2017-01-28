@@ -9,7 +9,7 @@ import compare from '../';
 
 commander
   .version('0.1.0')
-  .option('-f, --format [type]', 'Output format', 'json');
+  .option('-f, --format [type]', 'Output format', 'standart');
 
 
 commander
