@@ -4,10 +4,9 @@ import fs from 'fs';
 import path from 'path';
 import lo from 'lodash';
 import decode from './decoders';
-import report from './reporters';
+import report from './reporters/report';
 
-// FIXIT: variable names
-// TODO: fix this mess of code... divide output formatter
+// TODO: fix this mess of code... fix variable names. and i don't like that pyramid of ifs.
 
 const parseData = (data1, data2) => {
   const keys = lo.uniq([...lo.keys(data1), ...lo.keys(data2)]);
