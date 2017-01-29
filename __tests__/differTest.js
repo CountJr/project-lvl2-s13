@@ -96,13 +96,3 @@ Property 'group3' was added with complex value
 test('plain output | json compare', () => {
   expect(compare(firstNestedJson, secondNestedJson, 'plain')).toBe(expectedPlainResult);
 });
-
-// TODO: json output test
-
-// const expectedJsonResult = `{
-// json
-// }`;
-
-// test('json output | json compare', () => {
-//   expect(compare(firstNestedJson, secondNestedJson, 'json')).toBe(expectedJsonResult);
-// });

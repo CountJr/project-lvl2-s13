@@ -10,9 +10,9 @@ import report from './reporters';
 // TODO: make errors catching.
 
 const parseData = (data1, data2) => {
-  const keys = new Set([...Object.keys(data1), ...Object.keys(data2)]);
+  const keys = lo.union(Object.keys(data1), Object.keys(data2));
 
-  const result = [...keys.values()].map((key) => {
+  const result = keys.map((key) => {
     if (!lo.has(data1, key)) {
       return { name: key, type: 'added', val: lo.get(data2, key) };
     } else if (!lo.has(data2, key)) {
