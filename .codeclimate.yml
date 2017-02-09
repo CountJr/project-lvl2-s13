@@ -22,5 +22,4 @@ ratings:
   - "**.jsx"
 exclude_paths:
 - __tests__/
-after_success:
-- codeclimate < ./tmp/lcov.info
+
