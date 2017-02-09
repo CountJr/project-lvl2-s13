@@ -29,6 +29,7 @@ diffFromFiles(first.file.path, second.file.path [, format]);
 ```
 
 ### compare from strings
+```
 import diffFromStrings from 'config-compare-light';
 
 diffFromStrings(first.file.string, second.file.string, first.file.format, second.file.format [, format]);
