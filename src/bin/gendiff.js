@@ -5,7 +5,7 @@
 /* eslint-disable no-console */
 
 import commander from 'commander';
-import compare from '../';
+import { diffFromFiles } from '../';
 
 commander
   .version('0.1.0')
@@ -15,7 +15,7 @@ commander
 commander
   .arguments('<first_config> <second_config>')
   .action((firstConfig, secondConfig) => {
-    const result = compare(firstConfig, secondConfig, commander.format);
+    const result = diffFromFiles(firstConfig, secondConfig, commander.format);
     console.log(`${result}`);
   });
 

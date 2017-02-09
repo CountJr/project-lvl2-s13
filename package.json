@@ -6,9 +6,9 @@
     "url": "https://github.com/CountJr/project-lvl2-s13/issues"
   },
   "homepage": "https://github.com/CountJr/project-lvl2-s13#readme",
-  "version": "0.1.2",
+  "version": "0.2.2",
   "description": "Config comparation and patchiong utility",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
@@ -31,7 +31,6 @@
     "mylittlecolor": "*"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
     "babel-jest": "^18.0.0",
