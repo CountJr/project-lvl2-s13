@@ -2,44 +2,23 @@
 
 import fs from 'fs';
 import path from 'path';
-import lo from 'lodash';
 import decode from './decoders';
 import report from './reporters';
+import parseData from './parseData';
 
-// TODO: fix this mess of code... fix variable names. and i don't like that pyramid of ifs.
+
+// TODO: fix variable names.
 // TODO: make errors catching.
-
-const parseData = (data1, data2) => {
-  const keys = lo.union(Object.keys(data1), Object.keys(data2));
-
-  const result = keys.map((key) => {
-    if (!lo.has(data1, key)) {
-      return { name: key, type: 'added', val: lo.get(data2, key) };
-    } else if (!lo.has(data2, key)) {
-      return { name: key, type: 'removed', val: lo.get(data1, key) };
-    } else if (typeof lo.get(data1, key) === 'object') {
-      return { name: key, type: 'object', val: parseData(lo.get(data1, key), lo.get(data2, key)) };
-    } else if (lo.get(data1, key) !== lo.get(data2, key)) {
-      return { name: key, type: 'changed', val: [lo.get(data1, key), lo.get(data2, key)] };
-    }
-    return { name: key, type: 'unchanged', val: lo.get(data1, key) };
-  });
-
-  return result;
-};
 
 const getExtention = fileName =>
   path.extname(fileName).replace('.', '');
 
-// TODO: diffFromFiles + diffFromStrings
-
-export default (firstFileName, secondFileName, format = 'standart') => {
-  const firstFileExt = getExtention(firstFileName);
-  const secondFileExt = getExtention(secondFileName);
-
-  const firstFileContents = fs.readFileSync(firstFileName, 'utf-8');
-  const secondFileContents = fs.readFileSync(secondFileName, 'utf-8');
-
+export const diffFromStrings = (
+    firstFileContents,
+    secondFileContents,
+    firstFileExt,
+    secondFileExt,
+    format) => {
   const firstFileData = decode(firstFileExt)(firstFileContents);
   const secondFileData = decode(secondFileExt)(secondFileContents);
 
@@ -47,3 +26,16 @@ export default (firstFileName, secondFileName, format = 'standart') => {
 
   return report(format)(parsedData);
 };
+
+export const diffFromFiles = (firstFileName, secondFileName, format = 'standart') => {
+  const firstFileExt = getExtention(firstFileName);
+  const secondFileExt = getExtention(secondFileName);
+
+  const firstFileContents = fs.readFileSync(firstFileName, 'utf-8');
+  const secondFileContents = fs.readFileSync(secondFileName, 'utf-8');
+
+  return diffFromStrings(firstFileContents,
+    secondFileContents, firstFileExt, secondFileExt, format);
+};
+
+export default diffFromStrings;

@@ -1,7 +1,7 @@
 // @flow
 
 import path from 'path';
-import compare from '../';
+import { diffFromFiles } from '../src/index';
 
 // plain config tests
 
@@ -10,9 +10,9 @@ const firstFileYaml = path.join(__dirname, 'fixtures', 'firstFile.yml');
 const firstFileIni = path.join(__dirname, 'fixtures', 'firstFile.ini');
 const secondFile = path.join(__dirname, 'fixtures', 'secondFile.json');
 
-const diffJson = compare(firstFileJson, secondFile);
-const diffYaml = compare(firstFileYaml, secondFile);
-const diffIni = compare(firstFileIni, secondFile);
+const diffJson = diffFromFiles(firstFileJson, secondFile);
+const diffYaml = diffFromFiles(firstFileYaml, secondFile);
+const diffIni = diffFromFiles(firstFileIni, secondFile);
 
 const expectedResult = `{
     host: hexlet.io
@@ -23,13 +23,13 @@ const expectedResult = `{
 }
 `;
 
-test('main | json compare', () =>
+test('main | json diffFromFiles', () =>
   expect(diffJson).toEqual(expectedResult));
 
-test('main | yaml compare', () =>
+test('main | yaml diffFromFiles', () =>
   expect(diffYaml).toEqual(expectedResult));
 
-test('main | ini compare', () =>
+test('main | ini diffFromFiles', () =>
   expect(diffIni).toEqual(expectedResult));
 
 // nested config tests
@@ -70,16 +70,16 @@ const expectedNested = `{
 }
 `;
 
-test('nested | json compare', () => {
-  expect(compare(firstNestedJson, secondNestedJson)).toBe(expectedNested);
+test('nested | json diffFromFiles', () => {
+  expect(diffFromFiles(firstNestedJson, secondNestedJson)).toBe(expectedNested);
 });
 
-test('nested | yml compare', () => {
-  expect(compare(firstNestedYml, secondNestedYml)).toBe(expectedNested);
+test('nested | yml diffFromFiles', () => {
+  expect(diffFromFiles(firstNestedYml, secondNestedYml)).toBe(expectedNested);
 });
 
-test('nested | ini compare', () => {
-  expect(compare(firstNestedIni, secondNestedIni)).toBe(expectedNested);
+test('nested | ini diffFromFiles', () => {
+  expect(diffFromFiles(firstNestedIni, secondNestedIni)).toBe(expectedNested);
 });
 
 // plain output test
@@ -93,6 +93,6 @@ Property 'group2' was removed
 Property 'group3' was added with complex value
 `;
 
-test('plain output | json compare', () => {
-  expect(compare(firstNestedJson, secondNestedJson, 'plain')).toBe(expectedPlainResult);
+test('plain output | json diffFromFiles', () => {
+  expect(diffFromFiles(firstNestedJson, secondNestedJson, 'plain')).toBe(expectedPlainResult);
 });
